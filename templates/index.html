@@ -1,49 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
+
 <head>
-    <title>Apertura  Pacchetti Pokémon</title>
-    </head>
-    <body>
-        <h1>Apertura Pacchetti Pokémon</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco Pokémon</title>
+</head>
 
-            <p>Punti attuali: {{ punteggio }}</p>
+<body>
+    <h1>Benvenuto nel Gioco Pokémon</h1>
+    <p>Seleziona un'opzione:</p>
+    <ul>
+        <li><a href="{{ url_for('apri_pacchetto') }}">Apri un pacchetto (10 punti)</a></li>
+        <li><a href="{{ url_for('mostra_intera_collezione') }}">Mostra l'intera collezione</a></li>
+        <li><a href="{{ url_for('mostra_punti') }}">Mostra i punti totali</a></li>
+    </ul>
+    {% if output %}
 
-                <h2>La tua collezione:</h2>
-                    {% if collezione %}
-                        <ul>
-                                {% for carta in collezione %}
-                                        <li>{{ carta }}</li>
-                                                {% endfor %}
-                                                    </ul>
-                                                        {% else %}
-                                                            <p>La tua collezione è vuota.</p>
-                                                                {% endif %}
+    <p>{{ output }}</p>
+    {% if pacchetto %}
+    <ul>
+        {% for carta in pacchetto %}
+        <li>{{ carta }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    </div>
+    {% endif %}
+</body>
 
-                                                                    <h2>Azioni</h2>
-                                                                        <form method="POST" action="/apri_pacchetto">
-                                                                                <button type="submit">Apri Pacchetto (costo: 10 punti)</button>
-                                                                                    </form>
-                                                                                        <br>
-                                                                                            <form method="POST" action="/salva_collezione">
-                                                                                                    <button type="submit">Salva Collezione</button>
-                                                                                                        </form>
-
-                                                                                                            {% if nuove_carte %}
-                                                                                                                <h2>Hai trovato:</h2>
-                                                                                                                    <ul>
-                                                                                                                            {% for carta in nuove_carte %}
-                                                                                                                                    <li>{{ carta }}</li>
-                                                                                                                                            {% endfor %}
-                                                                                                                                                </ul>
-                                                                                                                                                    {% endif %}
-
-                                                                                                                                                        {% if messaggio %}
-                                                                                                                                                            <p style="color: green;">{{ messaggio }}</p>
-                                                                                                                                                                {% endif %}
-
-                                                                                                                                                                    {% if errore %}
-                                                                                                                                                                        <p style="color: red;">{{ errore }}</p>
-                                                                                                                                                                            {% endif %}
-
-                                                                                                                                                                            </body>
-                                                                                                                                                                            </html>
+</html>
